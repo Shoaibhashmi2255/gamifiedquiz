@@ -98,7 +98,7 @@ get progress(): number {
   playSound(type: 'correct' | 'wrong') {
     const file =
       type === 'correct'
-        ? 'assets/sounds/mixkit-game-correct-answer-2873.wav'
+        ? 'assets/sounds/mixkit-correct-answer-tone-2870.wav'
         : 'assets/sounds/mixkit-game-show-wrong-answer-buzz-950.wav';
 
     const sound = new Howl({ src: [file] });
