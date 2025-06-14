@@ -1,0 +1,48 @@
+<div class="xp-bar">
+  <!-- <p>{{ ((currentIndex + 1) / questions.length * 100) | number:'1.0-0' }}% Completed</p> -->
+  <!-- <div class="xp-fill" [style.width.%]="(currentIndex / questions.length) * 100"></div> -->
+  <div class="xp-fill" [style.width.%]="progress"></div>
+
+
+</div>
+
+<div class="quiz-container">
+  <div class="quiz-header">
+    <div class="question-count">Question {{ currentIndex + 1 }}</div>
+    <div class="score">Your score: {{ score }}</div>
+    <p>⏳ Time left: {{ timeLeft }}s</p>
+
+  </div>
+
+  <div class="question-box" [@fadeInOut]>
+    <h2>{{ currentQuestion.question }}</h2>
+    <p class="subtext">Choose from the options below.</p>
+
+    <div class="options">
+      <div *ngFor="let option of currentQuestion.options" (click)="selectOption(option)"
+        [class.selected]="selectedOption === option" class="option">
+        <img *ngIf="option.includes('assets/images')" [src]="option" />
+        <label *ngIf="!option.includes('assets/images')">{{ option }}</label>
+      </div>
+    </div>
+
+
+
+    <button class="submit-btn" (click)="submit()" [disabled]="!selectedOption">Submit</button>
+  </div>
+
+  <div class="badge" *ngIf="quizCompleted">
+    <h2>🎉 Quiz Completed!</h2>
+    <p>You scored {{ score }}/{{ questions.length }}</p>
+    <button (click)="restart()">Restart</button>
+  </div>
+</div>
+<div class="modal-backdrop" *ngIf="showBadgeDialog">
+  <div class="modal">
+    <h2>🏅 Achievements Unlocked</h2>
+    <ul>
+      <li *ngFor="let badge of badges">{{ badge }}</li>
+    </ul>
+    <button (click)="closeBadgeDialog()">Close</button>
+  </div>
+</div>
